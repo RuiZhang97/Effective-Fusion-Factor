@@ -12,15 +12,15 @@ class PrepareFusionFactorModule(RPNLossComputation):
     def __init__(self,cfg,proposal_matcher, box_coder,
                  generate_labels_func,
                  ):
-        self.proposal_matcher = proposal_matcher
-        self.box_coder = box_coder
+        self.proposal_matcher = proposal_matcher#proposal_matcher 匹配推荐区域
+        self.box_coder = box_coder#候选框编码将候选框从bbox编码为dealta bbox-gt bbox
         #self.box_cls_loss_func = sigmoid_focal_loss
         #self.bbox_reg_beta = bbox_reg_beta
-        self.copied_fields = ['labels']
-        self.generate_labels_func = generate_labels_func
-        self.discard_cases = ['between_thresholds']
+        self.copied_fields = ['labels']#？列表字符串？
+        self.generate_labels_func = generate_labels_func#调用 generate_labels_func
+        self.discard_cases = ['between_thresholds']#？列表字符串？
         #self.regress_norm = regress_norm
-        self.fuse_factors_generator = Sta_fusion_factors(beta=2)
+        self.fuse_factors_generator = Sta_fusion_factors(beta=2)#调用class Sta_fusion_factors
 
     def match_targets_to_anchors_forFF(self, anchor, target, copied_fields=[]):
         match_quality_matrix = boxlist_iou(target, anchor)
